@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+  web:
+    container_name: CMANDO
+    build: .
+    expose:
+     - 80 #puerto del contenedor
+    ports:
+     - 8000:80
+    volumes:
+      - /var/www/html/centro_de_mando:/var/www/html/centro_de_mando
+      - $PWD/log/nginx:/var/log/nginx
+      - $PWD/nginx:/etc/nginx/sites-available
+    #   - $PWD/nginx:/etc/nginx/conf.d
+    # network_mode: "host"
