@@ -1,5 +1,5 @@
 FROM ubuntu:18.04
-LABEL vendor=Francisco_Al3jandroCHPerez
+LABEL vendor=Francisco_Al3jandroCH
 LABEL version=3.0.0
 
 #actualizacion paquetes y herramientas necesarias
@@ -50,16 +50,12 @@ RUN curl -sS https://getcomposer.org/installer | php
 RUN sudo mv composer.phar /usr/local/bin/composer
 RUN composer --version
 
-#Eliminamos apache
+#Eliminamos apache que tiene instalado
 RUN dpkg -l | grep apache2 -y
 RUN apt-get purge apache2 apache2-bin apache2-data -y
 RUN apt-get autoremove -y
 RUN rm -rf  /etc/apache2
 RUN rm -rf /var/www/html/index.html
 
-#EXPOSE 80
-#enlace simbolico
-# RUN ln -s /etc/nginx/sites-available/cmando.conf /etc/nginx/sites-enabled/cmando.conf
-#directorio de trabajo del contenedor
 #WORKDIR /var/www/html/centro_de_mando
 CMD service php7.2-fpm start && nginx -g "daemon off;"
